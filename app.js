@@ -30,19 +30,25 @@ app.get("/process", async (req, res) =>{
         var collection = db.collection("PublicCompanies");
         var query;
         if(searchType == "ticker"){
-            query = {ticker:"searchVal"};
+            query = {ticker: searchVal};
         }
         else{
-            query = {company:"searchVal"};
+            query = {company: searchVal};
         }
         var results = await collection.find(query).toArray();
         results.forEach(item => {
             console.log(item.company, item.ticker, item.price);
         });
+
+        let item_list = "";
+        results.forEach(item => {
+            item_list += `<p>${item.company} - ${item.ticker} - $${item.price}</p>`;
+        });
         res.send(`
             <h1>Search Results</h1>
             <p>${results.length} results.</p>
-            <a href="/"> Go back to Search></a>
+            ${item_list}
+            <a href="/">Go back to Search</a>
             `);
     }
     catch (err){
