@@ -2,7 +2,8 @@ var express = require("express");
 const {MongoClient} = require("mongodb");
 var app = express();
 var port = process.env.PORT || 3000;
-var uri = "mongodb+srv://keremozturk_db_user:krm2005dnz@nosqlpractice.2dd9pek.mongodb.net/?appName=noSQLpractice";
+var uri = "mongodb+srv://keremozturk_db_user:krm2005dnz@nosqlpractice.2dd9pek.mongodb.net/Stock?retryWrites=true&w=majority";
+
 
 app.get("/", (req, res) => {
     res.send(`
